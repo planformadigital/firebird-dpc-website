@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#123044" />
+    <title>Firebird Direct Primary Care | Worthington, Ohio</title>
+    <meta
+      name="description"
+      content="Firebird Direct Primary Care offers personalized family medicine, direct physician access, longer visits, and clear membership pricing in Worthington, Ohio."
+    />
+    <script type="module" crossorigin src="/assets/index-dikjnlja.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-c8u2kb5d.css">
+    <style>
+      .firebird-practice-gallery {
+        display: none;
+        padding: 4.5rem 1.25rem;
+        background: #fffaf2;
+      }
+      .firebird-practice-gallery.is-ready {
+        display: block;
+      }
+      .firebird-practice-gallery h2 {
+        margin-top: 1rem;
+        max-width: 44rem;
+        color: #123044;
+        font-family: Georgia, serif;
+        font-size: clamp(2rem, 4vw, 3.25rem);
+        line-height: 1.08;
+      }
+      .firebird-practice-gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+      .firebird-practice-gallery-grid img {
+        display: block;
+        width: 100%;
+        height: 34rem;
+        object-fit: cover;
+        border-radius: 0.75rem;
+        box-shadow: 0 12px 30px rgba(18, 48, 68, 0.12);
+      }
+      img[src="/images/dr-hagen-profile.webp"],
+      .firebird-practice-gallery-grid img:first-child {
+        object-fit: contain !important;
+        object-position: center;
+        background: #f4eee4;
+      }
+      @media (max-width: 800px) {
+        .firebird-practice-gallery {
+          padding: 3.5rem 1.25rem;
+        }
+        .firebird-practice-gallery-grid {
+          grid-template-columns: 1fr;
+        }
+        .firebird-practice-gallery-grid img {
+          height: 28rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input name="bot-field" />
+      <input name="fullName" />
+      <input name="email" />
+      <input name="phone" />
+      <input name="preferredContact" />
+      <input name="membershipInterest" />
+      <textarea name="mainQuestion"></textarea>
+      <input name="bestTime" />
+      <input name="consent" />
+    </form>
+    <div id="root"></div>
+    <section class="firebird-practice-gallery" aria-label="Inside Firebird Direct Primary Care">
+      <div class="container-page">
+        <p class="eyebrow">Inside the practice</p>
+        <h2>A Welcoming Space for Personal Care</h2>
+        <div class="firebird-practice-gallery-grid">
+          <img src="/images/practice-welcome.webp" alt="Dr. Mark Hagen beside the Firebird Direct Primary Care sign" loading="lazy" />
+          <img src="/images/doctor-office.webp" alt="Dr. Mark Hagen in his office at Firebird Direct Primary Care" loading="lazy" />
+          <img src="/images/exam-room.webp" alt="Dr. Mark Hagen in a Firebird Direct Primary Care exam room" loading="lazy" />
+        </div>
+      </div>
+    </section>
+    <script>
+      (() => {
+        const gallery = document.querySelector(".firebird-practice-gallery");
+        const placeGallery = () => {
+          const footer = document.querySelector("#root footer");
+          if (!footer || !gallery || gallery.classList.contains("is-ready")) return false;
+          footer.before(gallery);
+          gallery.classList.add("is-ready");
+          return true;
+        };
+        if (!placeGallery()) {
+          const observer = new MutationObserver(() => {
+            if (placeGallery()) observer.disconnect();
+          });
+          observer.observe(document.getElementById("root"), { childList: true, subtree: true });
+        }
+      })();
+    </script>
+  </body>
+</html>
