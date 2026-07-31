@@ -42,7 +42,7 @@
         border-radius: 0.75rem;
         box-shadow: 0 12px 30px rgba(18, 48, 68, 0.12);
       }
-      img[src="/images/dr-hagen-profile.webp"],
+      img[src="/images/dr-hagen-profile-camera-removed.png"],
       .firebird-practice-gallery-grid img:first-child {
         object-fit: contain !important;
         object-position: center;
@@ -57,6 +57,132 @@
         }
         .firebird-practice-gallery-grid img {
           height: 28rem;
+        }
+      }
+      .firebird-newsletter {
+        display: none;
+        padding: 4.5rem 1.25rem;
+        background: #123044;
+        color: white;
+      }
+      .firebird-newsletter.is-ready {
+        display: block;
+      }
+      .firebird-newsletter-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+      }
+      .firebird-newsletter h2 {
+        margin: 0.8rem 0 0;
+        max-width: 38rem;
+        color: white;
+        font-family: Georgia, serif;
+        font-size: clamp(2rem, 4vw, 3.25rem);
+        line-height: 1.08;
+      }
+      .firebird-newsletter-copy {
+        margin: 1rem 0 0;
+        max-width: 38rem;
+        color: rgba(255,255,255,0.76);
+        line-height: 1.7;
+      }
+      .firebird-newsletter-form {
+        padding: 1.5rem;
+        background: white;
+        border-radius: 0.75rem;
+        box-shadow: 0 14px 34px rgba(0,0,0,0.16);
+      }
+      .firebird-newsletter-fields {
+        display: grid;
+        grid-template-columns: 1fr 1fr auto;
+        gap: 0.75rem;
+      }
+      .firebird-newsletter-form input {
+        min-width: 0;
+        padding: 0.8rem 0.9rem;
+        color: #123044;
+        border: 1px solid #b8c0c5;
+        border-radius: 0.4rem;
+      }
+      .firebird-newsletter-form button {
+        padding: 0.8rem 1.15rem;
+        color: white;
+        background: #c22626;
+        border: 0;
+        border-radius: 999px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .firebird-newsletter-privacy {
+        margin: 0.8rem 0 0;
+        color: #536875;
+        font-size: 0.78rem;
+      }
+      #root header a:has(img) {
+        width: clamp(205px, 26vw, 320px) !important;
+        max-width: 64vw;
+      }
+      #root header img {
+        width: 100% !important;
+        height: auto;
+        max-height: 118px;
+        object-fit: contain;
+        object-position: left center;
+      }
+      #root header {
+        background: #ffffff !important;
+      }
+      .firebird-team-profile {
+        padding: 4.5rem 1.25rem;
+        background: #fffaf2;
+      }
+      .firebird-team-profile-inner {
+        display: grid;
+        grid-template-columns: minmax(260px, 0.75fr) minmax(0, 1.25fr);
+        align-items: center;
+        gap: 2.5rem;
+      }
+      .firebird-team-profile img {
+        display: block;
+        width: 100%;
+        height: 32rem;
+        object-fit: cover;
+        object-position: center 22%;
+        border: 1px solid rgba(18, 48, 68, 0.1);
+        border-radius: 0.75rem;
+        box-shadow: 0 12px 30px rgba(18, 48, 68, 0.12);
+      }
+      .firebird-team-profile h2 {
+        margin-top: 1rem;
+        color: #123044;
+        font-family: Georgia, serif;
+        font-size: clamp(2rem, 4vw, 3.25rem);
+        line-height: 1.08;
+      }
+      .firebird-team-profile-copy {
+        margin-top: 1.5rem;
+        color: rgba(36, 55, 70, 0.78);
+        font-size: 1.08rem;
+        line-height: 1.8;
+      }
+      .firebird-team-profile-copy p + p {
+        margin-top: 1rem;
+      }
+      @media (max-width: 800px) {
+        .firebird-newsletter-inner,
+        .firebird-newsletter-fields {
+          grid-template-columns: 1fr;
+        }
+        .firebird-team-profile {
+          padding: 3.5rem 1.25rem;
+        }
+        .firebird-team-profile-inner {
+          grid-template-columns: 1fr;
+        }
+        .firebird-team-profile img {
+          height: 29rem;
         }
       }
     </style>
@@ -80,15 +206,157 @@
         <p class="eyebrow">Inside the practice</p>
         <h2>A Welcoming Space for Personal Care</h2>
         <div class="firebird-practice-gallery-grid">
-          <img src="/images/practice-welcome.webp" alt="Dr. Mark Hagen beside the Firebird Direct Primary Care sign" loading="lazy" />
+          <img src="/images/dr-hagen-profile-camera-removed.png" alt="Dr. Mark Hagen beside the Firebird Direct Primary Care sign" loading="lazy" />
           <img src="/images/doctor-office.webp" alt="Dr. Mark Hagen in his office at Firebird Direct Primary Care" loading="lazy" />
           <img src="/images/exam-room.webp" alt="Dr. Mark Hagen in a Firebird Direct Primary Care exam room" loading="lazy" />
         </div>
       </div>
     </section>
+    <section class="firebird-newsletter" aria-label="Firebird Direct Primary Care newsletter">
+      <div class="container-page firebird-newsletter-inner">
+        <div>
+          <p class="eyebrow" style="color:#f0bd6a">Stay connected</p>
+          <h2>Join the Firebird Newsletter</h2>
+          <p class="firebird-newsletter-copy">Sign up with your email address to receive the free Consumer’s Guide to Primary Care and the monthly Firebird DPC newsletter.</p>
+        </div>
+        <form class="firebird-newsletter-form" action="https://app.kit.com/forms/9352562/subscriptions" method="post">
+          <div class="firebird-newsletter-fields">
+            <input name="fields[first_name]" aria-label="First name" placeholder="First name" type="text" />
+            <input name="email_address" aria-label="Email address" placeholder="Email address" type="email" required />
+            <button type="submit">Subscribe</button>
+          </div>
+          <p class="firebird-newsletter-privacy">We respect your privacy. Unsubscribe at any time.</p>
+        </form>
+      </div>
+    </section>
     <script>
       (() => {
         const gallery = document.querySelector(".firebird-practice-gallery");
+        const newsletter = document.querySelector(".firebird-newsletter");
+        const meetAndGreetUrl = "/meet-and-greet.html";
+        const youtubeUrl = "https://www.youtube.com/@FirebirdDirectPrimaryCare";
+        const updateClientBranding = () => {
+          const headerLogo = document.querySelector("#root header img");
+          if (headerLogo) {
+            headerLogo.src = "/images/firebird-logo-rectangle-rising.png";
+            headerLogo.alt = "Firebird Direct Primary Care - Rising Above Traditional Medicine";
+          }
+
+          const socialX = [...document.querySelectorAll("#root footer a")]
+            .find((link) => (link.textContent || "").trim() === "X");
+          const socialContainer = socialX?.parentElement;
+          if (socialX) socialX.remove();
+          if (socialContainer && !socialContainer.querySelector(`a[href="${youtubeUrl}"]`)) {
+            const youtube = document.createElement("a");
+            youtube.href = youtubeUrl;
+            youtube.target = "_blank";
+            youtube.rel = "noreferrer";
+            youtube.className = "text-white/78 hover:text-white";
+            youtube.textContent = "YouTube";
+            socialContainer.append(youtube);
+          }
+
+          document.querySelectorAll("#root a").forEach((link) => {
+            const label = (link.textContent || "").trim();
+            if (link.getAttribute("href") === "/about" && label === "Meet Dr. Hagen") {
+              link.textContent = "Meet the Team";
+            }
+            if (label === "Meet & Greet" || label === "Schedule a Meet & Greet") {
+              link.href = meetAndGreetUrl;
+            }
+            if (label === "See What's Included" && link.dataset.firebirdDirectLink !== "services") {
+              const replacement = link.cloneNode(true);
+              replacement.href = "/services";
+              replacement.dataset.firebirdDirectLink = "services";
+              link.replaceWith(replacement);
+              return;
+            }
+            if (label === "Text the Practice") {
+              link.textContent = "Call or Text the Practice";
+              link.href = "tel:+16142597987";
+            }
+            if (label === "Call or Text the Practice" && link.getAttribute("href") !== "tel:+16142597987") {
+              link.href = "tel:+16142597987";
+            }
+            if (label.startsWith("Text (614)")) {
+              link.textContent = label.replace(/^Text /, "Call or text ");
+              link.href = "tel:+16142597987";
+            }
+            if (label.startsWith("Call or text (614)") && link.getAttribute("href") !== "tel:+16142597987") {
+              link.href = "tel:+16142597987";
+            }
+          });
+
+          document.querySelectorAll("#root footer p").forEach((paragraph) => {
+            if ((paragraph.textContent || "").trim().startsWith("Text:")) {
+              const textNode = [...paragraph.childNodes].find((node) => node.nodeType === 3);
+              if (textNode) textNode.textContent = "Call or text: ";
+              const phoneLink = paragraph.querySelector("a");
+              if (phoneLink) phoneLink.href = "tel:+16142597987";
+            }
+          });
+
+          if (window.location.pathname === "/about") {
+            document.title = "Meet the Team | Firebird Direct Primary Care";
+            const description = document.querySelector('meta[name="description"]');
+            if (description) {
+              description.content = "Meet Dr. Mark Hagen and Larken RN, the care team at Firebird Direct Primary Care in Worthington, Ohio.";
+            }
+            const pageHeading = document.querySelector("#root main h1");
+            if (pageHeading && pageHeading.textContent.includes("Dr. Mark Hagen")) {
+              pageHeading.textContent = "Meet the Firebird DPC Team";
+            }
+          }
+        };
+        const addLarkenTeamProfile = () => {
+          if (window.location.pathname !== "/about") return false;
+          if (document.querySelector(".firebird-team-profile")) return true;
+          const physicianImage = document.querySelector('#root main img[alt="Dr. Mark Hagen, DO"]');
+          const physicianSection = physicianImage?.closest("section");
+          if (!physicianSection) return false;
+
+          const section = document.createElement("section");
+          section.className = "firebird-team-profile";
+          section.setAttribute("aria-labelledby", "larken-rn-heading");
+          section.innerHTML = `
+            <div class="container-page firebird-team-profile-inner">
+              <img src="/images/larken-rn.webp" alt="Larken RN, registered nurse at Firebird Direct Primary Care" loading="lazy" width="680" height="954" />
+              <div>
+                <p class="eyebrow">Meet the care team</p>
+                <h2 id="larken-rn-heading">Larken RN</h2>
+                <p style="margin-top:0.75rem;font-weight:700;color:#c22626">Registered Nurse</p>
+                <div class="firebird-team-profile-copy">
+                  <p>Larken has been a Registered Nurse for the last 18 years, working in the emergency department. She has a passion for patient care and shares the vision of Firebird Direct Primary Care.</p>
+                  <p>You will see her around the office, helping with patient calls and registration and supporting the Firebird DPC care experience.</p>
+                </div>
+              </div>
+            </div>`;
+          physicianSection.after(section);
+          return true;
+        };
+        const addBlogLinks = () => {
+          document.querySelectorAll('#root header a[href="/contact"]').forEach((contactLink) => {
+            const parent = contactLink.parentElement;
+            if (!parent || parent.querySelector('a[href="/blog/"]')) return;
+            const blogLink = contactLink.cloneNode(true);
+            blogLink.href = "/blog/";
+            blogLink.textContent = "Blog";
+            parent.insertBefore(blogLink, contactLink);
+          });
+        };
+        const updateMeetAndGreetLinks = () => {
+          document.querySelectorAll("#root a").forEach((link) => {
+            if (
+              /meet\s*&\s*greet|schedule a meet/i.test(link.textContent || "") &&
+              link.dataset.firebirdDirectLink !== "meet"
+            ) {
+              const replacement = link.cloneNode(true);
+              replacement.href = meetAndGreetUrl;
+              replacement.dataset.firebirdDirectLink = "meet";
+              link.replaceWith(replacement);
+            }
+          });
+        };
         const placeGallery = () => {
           const footer = document.querySelector("#root footer");
           if (!footer || !gallery || gallery.classList.contains("is-ready")) return false;
@@ -96,12 +364,29 @@
           gallery.classList.add("is-ready");
           return true;
         };
+        const placeNewsletter = () => {
+          const footer = document.querySelector("#root footer");
+          if (!footer || !newsletter) return false;
+          if (newsletter.nextElementSibling !== footer) footer.before(newsletter);
+          newsletter.classList.add("is-ready");
+          return true;
+        };
         if (!placeGallery()) {
           const observer = new MutationObserver(() => {
-            if (placeGallery()) observer.disconnect();
+            placeGallery();
+            placeNewsletter();
+            addBlogLinks();
+            updateMeetAndGreetLinks();
+            updateClientBranding();
+            addLarkenTeamProfile();
           });
           observer.observe(document.getElementById("root"), { childList: true, subtree: true });
         }
+        placeNewsletter();
+        addBlogLinks();
+        updateMeetAndGreetLinks();
+        updateClientBranding();
+        addLarkenTeamProfile();
       })();
     </script>
   </body>
