@@ -235,6 +235,10 @@
     </section>
     <script>
       (() => {
+        if (/(invite|recovery)_token=/.test(location.hash) && location.pathname !== "/admin/") {
+          location.replace("/admin/" + location.hash);
+          return;
+        }
         const gallery = document.querySelector(".firebird-practice-gallery");
         const newsletter = document.querySelector(".firebird-newsletter");
         const meetAndGreetUrl = "/meet-and-greet.html";
@@ -327,7 +331,7 @@
           physicianSection.innerHTML = `
             <div class="container-page">
               <article class="firebird-team-card" aria-labelledby="mark-hagen-heading">
-                <img src="/images/dr-hagen-profile.webp" alt="Dr. Mark Hagen, physician at Firebird Direct Primary Care" loading="lazy" width="925" height="1400" />
+                <img src="/images/dr-hagen-profile-camera-removed.png" alt="Dr. Mark Hagen, physician at Firebird Direct Primary Care" loading="lazy" />
                 <div>
                   <p class="eyebrow">Meet the care team</p>
                   <h2 id="mark-hagen-heading">Dr. Mark Hagen, DO</h2>
