@@ -1,0 +1,4 @@
+import{text}from"./_blog-data.mjs";export const cookieName="firebird_blog_session";
+const cookie=(h,n)=>{for(const i of h.split(";")){const[k,...v]=i.trim().split("=");if(k===n)return decodeURIComponent(v.join("="))}return""};
+export async function requireEditor(e){const t=cookie(e.headers.cookie||e.headers.Cookie||"",cookieName);if(!t)return{response:text(401,"Please sign in.")};const u=process.env.URL||`https://${e.headers.host}`,r=await fetch(`${u}/.netlify/identity/user`,{headers:{authorization:`Bearer ${t}`}});if(!r.ok)return{response:text(401,"Please sign in again.")};const user=await r.json(),roles=user?.app_metadata?.roles||[];if(!roles.includes("editor")&&!roles.includes("admin"))return{response:text(403,"Editor access is required.")};return{user,token:t}}
+export async function handler(){return text(404,"Not found")}

@@ -1,0 +1,1 @@
+import{cookieName}from"./_blog-auth.mjs";export async function handler(){return{statusCode:303,headers:{location:"/admin/","set-cookie":`${cookieName}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`},body:""}}

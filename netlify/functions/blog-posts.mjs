@@ -1,0 +1,2 @@
+import{connectLambda}from"@netlify/blobs";import{json,listPosts,publicPost}from"./_blog-data.mjs";
+export async function handler(e){connectLambda(e);if(e.httpMethod!=="GET")return json(405,{error:"Method not allowed"});const p=(await listPosts()).filter(x=>x.status==="published"),s=e.queryStringParameters?.slug;if(s){const x=p.find(i=>i.slug===s);return x?json(200,publicPost(x)):json(404,{error:"Article not found"})}return json(200,p.map(({body,...x})=>x))}

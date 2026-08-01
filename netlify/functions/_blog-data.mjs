@@ -1,0 +1,9 @@
+import{getStore}from"@netlify/blobs";import{marked}from"marked";import sanitizeHtml from"sanitize-html";import{randomUUID}from"node:crypto";
+export const postStore=()=>getStore("firebird-blog-posts"),imageStore=()=>getStore("firebird-blog-images");
+export const json=(statusCode,value,headers={})=>({statusCode,headers:{"content-type":"application/json; charset=utf-8",...headers},body:JSON.stringify(value)});
+export const text=(statusCode,body,headers={})=>({statusCode,headers:{"content-type":"text/plain; charset=utf-8",...headers},body});
+export const cleanSlug=(v="")=>String(v).toLowerCase().trim().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+export function normalizePost(i,e={}){const title=String(i.title||"").trim(),slug=cleanSlug(i.slug||title),description=String(i.description||"").trim(),body=String(i.body||"");if(!title||!slug||!description||!body)throw Error("Title, URL name, summary, and article are required.");return{id:e.id||i.id||randomUUID(),title,slug,description,author:String(i.author||"Dr. Mark Hagen").trim(),date:new Date(i.date||Date.now()).toISOString(),status:i.status==="published"?"published":"draft",featuredImage:String(i.featuredImage||""),imageAlt:String(i.imageAlt||"").trim(),body,createdAt:e.createdAt||new Date().toISOString(),updatedAt:new Date().toISOString()}}
+export const publicPost=p=>({...p,bodyHtml:sanitizeHtml(marked.parse(p.body),{allowedTags:sanitizeHtml.defaults.allowedTags.concat(["img"]),allowedAttributes:{a:["href","title","target","rel"],img:["src","alt","title"]},allowedSchemes:["http","https","mailto"]})});
+export async function listPosts(){const s=postStore(),{blobs=[]}=await s.list(),a=[];for(const b of blobs){const p=await s.get(b.key,{type:"json"});if(p)a.push(p)}return a.sort((x,y)=>new Date(y.date)-new Date(x.date))}
+export async function handler(){return text(404,"Not found")}
