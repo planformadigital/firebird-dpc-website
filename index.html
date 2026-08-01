@@ -311,7 +311,10 @@
           }
         };
         const addLarkenTeamProfile = () => {
-          if (window.location.pathname !== "/about") return false;
+          if (window.location.pathname !== "/about") {
+            document.querySelector(".firebird-team-profile")?.remove();
+            return false;
+          }
           if (document.querySelector(".firebird-team-profile")) return true;
           const physicianImage = document.querySelector('#root main img[alt="Dr. Mark Hagen, DO"]');
           const physicianSection = physicianImage?.closest("section");

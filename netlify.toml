@@ -1,0 +1,50 @@
+[build]
+command = "pnpm run build"
+publish = "dist"
+functions = "netlify/functions"
+
+[build.environment]
+NODE_VERSION = "22"
+
+[functions."*"]
+node_bundler = "esbuild"
+
+[[redirects]]
+from = "/api/blog/posts"
+to = "/.netlify/functions/blog-posts"
+status = 200
+
+[[redirects]]
+from = "/api/blog/login"
+to = "/.netlify/functions/blog-login"
+status = 200
+
+[[redirects]]
+from = "/api/blog/logout"
+to = "/.netlify/functions/blog-logout"
+status = 200
+
+[[redirects]]
+from = "/api/blog/admin/posts"
+to = "/.netlify/functions/blog-admin-posts"
+status = 200
+
+[[redirects]]
+from = "/api/blog/admin/upload"
+to = "/.netlify/functions/blog-upload"
+status = 200
+
+[[redirects]]
+from = "/api/blog/image/*"
+to = "/.netlify/functions/blog-image/:splat"
+status = 200
+
+[[redirects]]
+from = "/blog/*"
+to = "/blog/article.html"
+status = 200
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
