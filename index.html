@@ -135,17 +135,25 @@
       #root header {
         background: #ffffff !important;
       }
-      .firebird-team-profile {
+      .firebird-team-profiles {
         padding: 4.5rem 1.25rem;
-        background: #fffaf2;
+        background: #ffffff;
       }
-      .firebird-team-profile-inner {
+      .firebird-team-card {
         display: grid;
         grid-template-columns: minmax(260px, 0.75fr) minmax(0, 1.25fr);
         align-items: center;
         gap: 2.5rem;
+        padding: clamp(1.5rem, 3vw, 2.5rem);
+        background: #fffaf2;
+        border: 1px solid rgba(18, 48, 68, 0.1);
+        border-radius: 1rem;
+        box-shadow: 0 14px 34px rgba(18, 48, 68, 0.08);
       }
-      .firebird-team-profile img {
+      .firebird-team-card + .firebird-team-card {
+        margin-top: 2rem;
+      }
+      .firebird-team-card img {
         display: block;
         width: 100%;
         height: 32rem;
@@ -156,7 +164,7 @@
         border-radius: 0.75rem;
         box-shadow: 0 12px 30px rgba(18, 48, 68, 0.12);
       }
-      .firebird-team-profile h2 {
+      .firebird-team-card h2 {
         margin-top: 1rem;
         color: #123044;
         font-family: Georgia, serif;
@@ -177,13 +185,13 @@
         .firebird-newsletter-fields {
           grid-template-columns: 1fr;
         }
-        .firebird-team-profile {
+        .firebird-team-profiles {
           padding: 3.5rem 1.25rem;
         }
-        .firebird-team-profile-inner {
+        .firebird-team-card {
           grid-template-columns: 1fr;
         }
-        .firebird-team-profile img {
+        .firebird-team-card img {
           height: 29rem;
         }
       }
@@ -312,21 +320,35 @@
         };
         const addLarkenTeamProfile = () => {
           if (window.location.pathname !== "/about") {
-            document.querySelector(".firebird-team-profile")?.remove();
+            document.querySelector(".firebird-team-profiles")?.remove();
             return false;
           }
-          if (document.querySelector(".firebird-team-profile")) return true;
+          if (document.querySelector(".firebird-team-profiles")) return true;
           const physicianImage = document.querySelector('#root main img[alt="Dr. Mark Hagen, DO"]');
           const physicianSection = physicianImage?.closest("section");
           if (!physicianSection) return false;
 
-          const section = document.createElement("section");
-          section.className = "firebird-team-profile";
-          section.setAttribute("aria-labelledby", "larken-rn-heading");
-          section.innerHTML = `
-            <div class="container-page firebird-team-profile-inner">
-              <img src="/images/larken-rn.webp" alt="Larken RN, registered nurse at Firebird Direct Primary Care" loading="lazy" width="680" height="954" />
-              <div>
+          physicianSection.className = "firebird-team-profiles";
+          physicianSection.setAttribute("aria-label", "Firebird Direct Primary Care team profiles");
+          physicianSection.innerHTML = `
+            <div class="container-page">
+              <article class="firebird-team-card" aria-labelledby="mark-hagen-heading">
+                <img src="/images/dr-hagen-profile.webp" alt="Dr. Mark Hagen, physician at Firebird Direct Primary Care" loading="lazy" width="925" height="1400" />
+                <div>
+                  <p class="eyebrow">Meet the care team</p>
+                  <h2 id="mark-hagen-heading">Dr. Mark Hagen, DO</h2>
+                  <p style="margin-top:0.75rem;font-weight:700;color:#c22626">Osteopathic Physician · Board-Certified in Family Medicine</p>
+                  <div class="firebird-team-profile-copy">
+                    <p>Dr. Mark Hagen grew up in upstate New York and earned a B.S. in Medical Technology from West Virginia University before attending the West Virginia School of Osteopathic Medicine.</p>
+                    <p>He completed his Family Medicine residency at Doctors Hospital in Columbus, served as Chief Resident, and created Firebird Direct Primary Care to offer a more personal, accessible, and transparent approach to family medicine.</p>
+                    <p>His care philosophy centers on knowing patients personally and creating time for thoughtful, direct primary care.</p>
+                  </div>
+                  <a class="button-primary" style="display:inline-flex;margin-top:1.5rem" href="/meet-and-greet.html">Schedule a Meet &amp; Greet</a>
+                </div>
+              </article>
+              <article class="firebird-team-card" aria-labelledby="larken-rn-heading">
+                <img src="/images/larken-rn.webp" alt="Larken RN, registered nurse at Firebird Direct Primary Care" loading="lazy" width="680" height="954" />
+                <div>
                 <p class="eyebrow">Meet the care team</p>
                 <h2 id="larken-rn-heading">Larken RN</h2>
                 <p style="margin-top:0.75rem;font-weight:700;color:#c22626">Registered Nurse</p>
@@ -334,9 +356,13 @@
                   <p>Larken has been a Registered Nurse for the last 18 years, working in the emergency department. She has a passion for patient care and shares the vision of Firebird Direct Primary Care.</p>
                   <p>You will see her around the office, helping with patient calls and registration and supporting the Firebird DPC care experience.</p>
                 </div>
-              </div>
+                </div>
+              </article>
             </div>`;
-          physicianSection.after(section);
+          const heroEyebrow = document.querySelector("#root main .eyebrow");
+          if (heroEyebrow && heroEyebrow.textContent.trim() === "Meet the physician") {
+            heroEyebrow.textContent = "Meet the care team";
+          }
           return true;
         };
         const addBlogLinks = () => {
