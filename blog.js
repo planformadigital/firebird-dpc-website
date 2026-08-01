@@ -35,7 +35,7 @@ async function renderListing() {
       </article>`).join("");
   } catch {
     container.className = "";
-    container.innerHTML = '<div class="blog-empty"><h2>Articles are temporarily unavailable.</h2><p>Please check back soon.</p></div>';
+    container.innerHTML = '<div class="blog-empty"><h2>New articles are coming soon.</h2><p>Check back for practical guidance from Dr. Hagen and Firebird Direct Primary Care.</p></div>';
   }
 }
 
