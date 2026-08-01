@@ -359,7 +359,22 @@
           }
           return true;
         };
-        const addBlogLinks = () => {};
+        const addBlogLinks = () => {
+          document.querySelectorAll('#root header a[href="/contact"]').forEach((contactLink) => {
+            const parent = contactLink.parentElement;
+            if (!parent) return;
+            if (parent.querySelectorAll('[data-firebird-blog-link="true"]').length === 1) return;
+            parent.querySelectorAll('[data-firebird-blog-link="true"]').forEach((link) => link.remove());
+            const blogLink = contactLink.cloneNode(true);
+            blogLink.href = "/blog/";
+            blogLink.textContent = "Blog";
+            blogLink.dataset.firebirdBlogLink = "true";
+            parent.insertBefore(blogLink, contactLink);
+          });
+          document.querySelectorAll('[data-firebird-blog-link="true"]').forEach((link) => {
+            if (!link.parentElement || !link.parentElement.querySelector('a[href="/contact"]')) link.remove();
+          });
+        };
         const updateMeetAndGreetLinks = () => {
           document.querySelectorAll("#root a").forEach((link) => {
             if (

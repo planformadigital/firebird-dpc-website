@@ -21,6 +21,11 @@ to = "/.netlify/functions/blog-logout"
 status = 200
 
 [[redirects]]
+from = "/api/blog/accept-invite"
+to = "/.netlify/functions/blog-accept-invite"
+status = 200
+
+[[redirects]]
 from = "/api/blog/admin/posts"
 to = "/.netlify/functions/blog-admin-posts"
 status = 200

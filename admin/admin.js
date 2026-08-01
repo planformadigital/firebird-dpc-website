@@ -7,9 +7,16 @@ const slugify = (value) =>
   value.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 function showOnly(id) {
-  ["#loading", "#login-panel", "#forbidden-panel", "#editor-app"].forEach((selector) => {
+  ["#loading", "#login-panel", "#set-password-panel", "#forbidden-panel", "#editor-app"].forEach((selector) => {
     $(selector).hidden = selector !== id;
   });
+}
+
+function detectAuthToken() {
+  const hash = location.hash.slice(1);
+  const match = hash.match(/(invite|recovery)_token=([^&]+)/);
+  if (!match) return null;
+  return { kind: match[1], token: decodeURIComponent(match[2]) };
 }
 
 function clearForm() {
@@ -78,6 +85,32 @@ async function loadPosts() {
   renderList();
   clearForm();
 }
+
+$("#set-password-form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const password = $("#set-password-password").value;
+  const confirm = $("#set-password-confirm").value;
+  $("#set-password-message").textContent = "Saving…";
+  if (password !== confirm) {
+    $("#set-password-message").textContent = "Passwords do not match.";
+    return;
+  }
+  const response = await fetch("/api/blog/accept-invite", {
+    method: "POST",
+    credentials: "same-origin",
+    body: new URLSearchParams({
+      token: $("#set-password-token").value,
+      kind: $("#set-password-kind").value,
+      password,
+      confirm,
+    }),
+  });
+  if (!response.ok) {
+    $("#set-password-message").textContent = await response.text();
+    return;
+  }
+  location.href = "/admin/";
+});
 
 $("#new-post-button").addEventListener("click", clearForm);
 $("#post-title").addEventListener("input", () => {
@@ -155,6 +188,18 @@ $("#delete-post-button").addEventListener("click", async () => {
   await loadPosts();
 });
 
-loadPosts().catch((error) => {
-  $("#loading").innerHTML = `<p>${error.message}</p>`;
-});
+const authToken = detectAuthToken();
+if (authToken) {
+  history.replaceState(null, "", location.pathname + location.search);
+  $("#set-password-token").value = authToken.token;
+  $("#set-password-kind").value = authToken.kind;
+  if (authToken.kind === "recovery") {
+    $("#set-password-heading").textContent = "Reset your password";
+    $("#set-password-copy").textContent = "Choose a new password for your blog editor account.";
+  }
+  showOnly("#set-password-panel");
+} else {
+  loadPosts().catch((error) => {
+    $("#loading").innerHTML = `<p>${error.message}</p>`;
+  });
+}

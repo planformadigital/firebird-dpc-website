@@ -10,7 +10,7 @@
   <body>
     <header class="admin-header">
       <a href="/" class="admin-logo">
-        <img src="/images/firebird-logo-header.png" alt="Firebird Direct Primary Care" />
+        <img src="/images/firebird-logo-rectangle-rising.png" alt="Firebird Direct Primary Care - Rising Above Traditional Medicine" />
       </a>
       <div>
         <a href="/blog/" target="_blank" rel="noreferrer">View Blog</a>
@@ -31,6 +31,20 @@
           <label>Email <input type="email" name="email" autocomplete="email" required /></label>
           <label>Password <input type="password" name="password" autocomplete="current-password" required /></label>
           <button class="primary-button" type="submit">Log in</button>
+        </form>
+      </section>
+
+      <section id="set-password-panel" class="panel narrow" hidden>
+        <p class="eyebrow">Firebird DPC</p>
+        <h1 id="set-password-heading">Set your password</h1>
+        <p id="set-password-copy">Choose a password to finish activating your blog editor account.</p>
+        <form id="set-password-form" class="stack-form">
+          <input id="set-password-token" type="hidden" />
+          <input id="set-password-kind" type="hidden" value="invite" />
+          <label>New password <input id="set-password-password" type="password" autocomplete="new-password" minlength="8" required /></label>
+          <label>Confirm password <input id="set-password-confirm" type="password" autocomplete="new-password" minlength="8" required /></label>
+          <p id="set-password-message" class="save-message" aria-live="polite"></p>
+          <button class="primary-button" type="submit">Set password and log in</button>
         </form>
       </section>
 
