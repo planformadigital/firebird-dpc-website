@@ -43,12 +43,6 @@
         border-radius: 0.75rem;
         box-shadow: 0 12px 30px rgba(18, 48, 68, 0.12);
       }
-      img[src="/images/dr-hagen-profile-camera-removed.png"],
-      .firebird-practice-gallery-grid img:first-child {
-        object-fit: contain !important;
-        object-position: center;
-        background: #f4eee4;
-      }
       @media (max-width: 800px) {
         .firebird-practice-gallery {
           padding: 3.5rem 1.25rem;
@@ -365,16 +359,7 @@
           }
           return true;
         };
-        const addBlogLinks = () => {
-          document.querySelectorAll('#root header a[href="/contact"]').forEach((contactLink) => {
-            const parent = contactLink.parentElement;
-            if (!parent || parent.querySelector('a[href="/blog/"]')) return;
-            const blogLink = contactLink.cloneNode(true);
-            blogLink.href = "/blog/";
-            blogLink.textContent = "Blog";
-            parent.insertBefore(blogLink, contactLink);
-          });
-        };
+        const addBlogLinks = () => {};
         const updateMeetAndGreetLinks = () => {
           document.querySelectorAll("#root a").forEach((link) => {
             if (
